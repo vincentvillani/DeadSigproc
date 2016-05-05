@@ -245,9 +245,10 @@ private:
 public:
 
 	//Total data size in bytes (excluding the header)
-	size_t dataByteSize;
+	size_t packedDataByteSize;
 	std::ifstream infile; //Input file stream
 	SigprocHeader hdr;
+	std::string filename;
 
 	/*!
 	\brief Create a new SigprocFilterbank object from a file.
@@ -261,9 +262,12 @@ public:
 	SigprocFilterbank(std::string filename)
 	{
 
-		this->infile.open(filename.c_str(),std::ifstream::in | std::ifstream::binary);
+		//Copy the file name
+		this->filename = filename;
 
-		//L O L, who needs to check for errors when code works 100% of the time /s
+		this->infile.open(filename.c_str(), std::ifstream::in | std::ifstream::binary);
+
+		//L O L, who needs to check for errors when code works 100% of the time /end sarcasm
 		//TODO: Add error checking again
 		//ErrorChecker::check_file_error(infile, filename);
 
@@ -271,7 +275,7 @@ public:
 		read_header(this->infile, hdr);
 
 		//Data size in bytes
-		this->dataByteSize = (size_t) hdr.nsamples * hdr.nbits * hdr.nchans / 8;
+		this->packedDataByteSize = (size_t) hdr.nsamples * hdr.nbits * hdr.nchans / 8;
 
 
 		//Seek to the end of the header
@@ -296,9 +300,10 @@ public:
 	}
 
 
+
 	uint64_t getCurrentBytePosition()
 	{
-		uint64_t currentBytePos = infile.tellg(); // - hdr.size;
+		uint64_t currentBytePos = infile.tellg();
 
 		return currentBytePos - hdr.size;
 	}
@@ -307,6 +312,12 @@ public:
 	bool hasReachedEOF()
 	{
 		return infile.eof();
+	}
+
+
+	uint64_t calcUnpackedByteSize()
+	{
+		return nsamps * nchans;
 	}
 
 

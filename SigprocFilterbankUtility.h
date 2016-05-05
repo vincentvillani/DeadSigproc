@@ -68,7 +68,7 @@ Note: Only unpacks big endian bit ordering
 Originally written by Dr Ewan Barr
 Modified by Vincent Villani (2016)
 */
-void unpackRawDataBlock(RawDataBlock* rawDataBlock, unsigned char* unpackedData, int nbits, int nbytes)
+void UnpackRawDataBlock(RawDataBlock* rawDataBlock, unsigned char* unpackedData, int nbits, int nbytes)
 {
 	int ii,jj;
 

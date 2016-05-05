@@ -8,9 +8,15 @@
 #ifndef DEADSIGPROC_H_
 #define DEADSIGPROC_H_
 
-#include "SigprocFilterbank.h"
 #include "RawDataBlock.h"
+
+#include "SigprocFilterbank.h"
 #include "SigprocFilterbankUtility.h"
+
+#include "SigprocFilterbankOutput.h"
+#include "SigprocFilterbankOutputUtility.h"
+
+#include "UnitTests.h"
 
 
 
