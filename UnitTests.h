@@ -101,9 +101,13 @@ void UnitTest_ReadUnpackPackWrite()
 	PrintFilterbankHeader(&SPFIn);
 	PrintFilterbankHeader(&SPFOut);
 
-	//Read all data from each filterbank file in and make sure they are the same
+	//Allocate space for each rawDataBlock
 	RawDataBlock rawDataBlockIn(SPFIn.packedDataByteSize, (unsigned char)SPFIn.get_nbits());
 	RawDataBlock rawDataBlockOut(SPFOut.packedDataByteSize, (unsigned char)SPFOut.get_nbits());
+
+	//Read all data from each filterbank file in and make sure they are the same
+	ReadFilterbankData(&SPFIn, &rawDataBlockIn);
+	ReadFilterbankData(&SPFOut, &rawDataBlockOut);
 
 	//Make sure the input byte sizes match
 	if(SPFIn.packedDataByteSize != SPFOut.packedDataByteSize)
