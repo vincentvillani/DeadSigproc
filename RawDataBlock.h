@@ -24,11 +24,11 @@ public:
 	uint64_t totalDataLength; //Number of elements in the 'packed raw data' array
 	uint64_t usedDataLength; //How many elements in the packedRawData array are storing some actual data?
 
-	RawDataBlock() : packedRawData(NULL), nBits(0), totalDataLength(0), usedDataLength(0)
+	inline RawDataBlock() : packedRawData(NULL), nBits(0), totalDataLength(0), usedDataLength(0)
 	{
 	}
 
-	RawDataBlock(uint64_t arrayLength, unsigned char nBits)
+	inline RawDataBlock(uint64_t arrayLength, unsigned char nBits)
 	{
 		totalDataLength = arrayLength;
 		usedDataLength = 0;
@@ -43,7 +43,7 @@ public:
 	{
 	}
 	*/
-	~RawDataBlock()
+	inline ~RawDataBlock()
 	{
 		if(packedRawData != NULL)
 			delete [] packedRawData;

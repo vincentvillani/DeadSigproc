@@ -86,7 +86,7 @@ protected:
 	\param foff The bandwidth of a frequency channel.
 	\param tsamp The sampling time of the data.
 	*/
-	Filterbank(unsigned int nsamps,
+	inline Filterbank(unsigned int nsamps,
 		 unsigned int nchans, unsigned char nbits,
 		 float fch1, float foff, float tsamp)
 	:nsamps(nsamps),nchans(nchans),
@@ -100,13 +100,13 @@ protected:
 	Create a new Filterbank object with the data pointer and
 	all metadata set to zero.
 	*/
-	Filterbank(void)
+	inline Filterbank(void)
 	:nsamps(0),nchans(0),
 	 nbits(0),fch1(0.0),foff(0.0),tsamp(0.0){}
 
 
 	//Free all allocated data
-	virtual ~Filterbank()
+	inline virtual ~Filterbank()
 	{
 	}
 
@@ -117,84 +117,84 @@ public:
 
 	\return The currently set sampling time.
 	*/
-	virtual float get_tsamp(void){return tsamp;}
+	inline virtual float get_tsamp(void){return tsamp;}
 
 	/*!
 	\brief Set the sampling time.
 
 	\param tsamp The sampling time of the data (in seconds).
 	*/
-	virtual void set_tsamp(float tsamp){this->tsamp = tsamp;}
+	inline virtual void set_tsamp(float tsamp){this->tsamp = tsamp;}
 
 	/*!
 	\brief Get the currently set channel bandwidth.
 
 	\return The channel bandwidth (in MHz).
 	*/
-	virtual float get_foff(void){return foff;}
+	inline virtual float get_foff(void){return foff;}
 
 	/*!
 	\brief Set the channel bandwidth.
 
 	\param foff The channel bandwidth (in MHz).
 	*/
-	virtual void set_foff(float foff){this->foff = foff;}
+	inline virtual void set_foff(float foff){this->foff = foff;}
 
 	/*!
 	\brief Get the frequency of the top channel.
 
 	\return The frequency of channel 0 (in MHz)
 	*/
-	virtual float get_fch1(void){return fch1;}
+	inline virtual float get_fch1(void){return fch1;}
 
 	/*!
 	\brief Set the frequency of the top channel.
 
 	\param fch1 The frequency of channel 0 (in MHz).
 	*/
-	virtual void set_fch1(float fch1){this->fch1 = fch1;}
+	inline virtual void set_fch1(float fch1){this->fch1 = fch1;}
 
 	/*!
 	\brief Get the number of frequency channels.
 
 	\return The number of frequency channels.
 	*/
-	virtual float get_nchans(void){return nchans;}
+	inline virtual float get_nchans(void){return nchans;}
 
 	/*!
 	\brief Set the number of frequency channels.
 
 	\param nchans The number of frequency channels in the data.
 	*/
-	virtual void set_nchans(unsigned int nchans){this->nchans = nchans;}
+	inline virtual void set_nchans(unsigned int nchans){this->nchans = nchans;}
 
 	/*!
 	\brief Get the number of time samples in the data.
 
 	\return The number of time samples.
 	*/
-	virtual unsigned int get_nsamps(void){return nsamps;}
+	inline virtual unsigned int get_nsamps(void){return nsamps;}
 
 	/*!
 	\brief Set the number of time samples in data.
 
 	\param nsamps The number of time samples.
 	*/
-	virtual void set_nsamps(unsigned int nsamps){this->nsamps = nsamps;}
+	inline virtual void set_nsamps(unsigned int nsamps){this->nsamps = nsamps;}
 
 	/*!
 	\brief Get the number of bits per sample.
 
 	\return The number of bits per sample.
 	*/
-	virtual float get_nbits(void){return nbits;}
+	inline virtual float get_nbits(void){return nbits;}
 
 	/*!
 	\brief Set the number of bits per sample.
 
 	\param nbits The number of bits per sample.
 	*/
-	virtual void set_nbits(unsigned char nbits){this->nbits = nbits;}
+	inline virtual void set_nbits(unsigned char nbits){this->nbits = nbits;}
 
 	/*!
 	\brief Get the pointer to the filterbank data.
@@ -216,7 +216,7 @@ public:
 	\return The centre frequency of the filterbank data.
 	*/
 
-	virtual float get_cfreq(void)
+	inline virtual float get_cfreq(void)
 	{
 		if (foff < 0)
 		  return fch1 + foff * nchans / 2;
@@ -259,7 +259,7 @@ public:
 
 	\param filename Path to a valid sigproc filterbank file.
 	*/
-	SigprocFilterbank(std::string filename)
+	inline SigprocFilterbank(std::string filename)
 	{
 
 		//Copy the file name
@@ -267,9 +267,12 @@ public:
 
 		this->infile.open(filename.c_str(), std::ifstream::in | std::ifstream::binary);
 
-		//L O L, who needs to check for errors when code works 100% of the time /end sarcasm
-		//TODO: Add error checking again
-		//ErrorChecker::check_file_error(infile, filename);
+		//Did the file open sucessfully?
+		if(!infile.is_open())
+		{
+			fprintf(stderr, "SigprocFilterbank::SigprocFilterbank(): Unable to open %s filterbank file", filename.c_str());
+			exit(1);
+		}
 
 		// Read the header
 		read_header(this->infile, hdr);
@@ -301,7 +304,7 @@ public:
 
 
 
-	uint64_t getCurrentBytePosition()
+	inline uint64_t getCurrentBytePosition()
 	{
 		uint64_t currentBytePos = infile.tellg();
 
@@ -309,13 +312,13 @@ public:
 	}
 
 
-	bool hasReachedEOF()
+	inline bool hasReachedEOF()
 	{
 		return infile.eof();
 	}
 
 
-	uint64_t calcUnpackedByteSize()
+	inline uint64_t calcUnpackedByteSize()
 	{
 		return nsamps * nchans;
 	}

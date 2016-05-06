@@ -28,7 +28,7 @@ public:
 	std::ofstream outputFileStream;
 
 
-	SigprocFilterbankOutput(std::string headerStealFilepath, std::string outputFilename)
+	inline SigprocFilterbankOutput(std::string headerStealFilepath, std::string outputFilename)
 	{
 		//Open the filterbank to steal the header from
 		inputFileStream.open(headerStealFilepath, std::ifstream::in | std::ifstream::binary);

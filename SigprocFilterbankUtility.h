@@ -27,7 +27,7 @@
 
 
 //Fills up a rawDataBlock with data from a filterbank
-void ReadFilterbankData(SigprocFilterbank* SPF, RawDataBlock* rawDataBlock)
+inline void ReadFilterbankData(SigprocFilterbank* SPF, RawDataBlock* rawDataBlock)
 {
 	if(SPF->infile.eof() || SPF->infile.bad())
 	{
@@ -44,7 +44,7 @@ void ReadFilterbankData(SigprocFilterbank* SPF, RawDataBlock* rawDataBlock)
 }
 
 
-void ReadFilterbankData(SigprocFilterbank* SPF, unsigned char* packedDataOutput, uint64_t bytesToRead, uint64_t& bytesRead)
+inline void ReadFilterbankData(SigprocFilterbank* SPF, unsigned char* packedDataOutput, uint64_t bytesToRead, uint64_t& bytesRead)
 {
 
 	if(SPF->infile.eof() || SPF->infile.bad())
@@ -68,7 +68,7 @@ Note: Only unpacks big endian bit ordering
 Originally written by Dr Ewan Barr
 Modified by Vincent Villani (2016)
 */
-void UnpackRawDataBlock(RawDataBlock* rawDataBlock, unsigned char* unpackedData, int nbits, int nbytes)
+inline void UnpackRawDataBlock(RawDataBlock* rawDataBlock, unsigned char* unpackedData, int nbits, int nbytes)
 {
 	int ii,jj;
 
@@ -106,7 +106,7 @@ void UnpackRawDataBlock(RawDataBlock* rawDataBlock, unsigned char* unpackedData,
 
 
 
-void PrintFilterbankHeader(SigprocFilterbank* SPF)
+inline void PrintFilterbankHeader(SigprocFilterbank* SPF)
 {
 
 	printf("\nNumber of Samples: %u\n", SPF->get_nsamps());

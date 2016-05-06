@@ -16,7 +16,7 @@
 //TODO: Add a routine to pack data back into 1, 2 or 4 bit arrays
 //TODO: Can probably optimise this, some operations may not be needed
 //nbits = number of bits to use per byte
-void PackUnpackedData(unsigned char* unpackedData, unsigned char* packedData, int nbits, uint64_t unpackedDataLength)
+inline void PackUnpackedData(unsigned char* unpackedData, unsigned char* packedData, int nbits, uint64_t unpackedDataLength)
 {
 	switch(nbits)
 	{
@@ -38,7 +38,7 @@ void PackUnpackedData(unsigned char* unpackedData, unsigned char* packedData, in
 }
 
 //Write data to an output file
-void WriteSigprocOutputFile(SigprocFilterbankOutput* SPFO, unsigned char* packedData, uint64_t byteSize)
+inline void WriteSigprocOutputFile(SigprocFilterbankOutput* SPFO, unsigned char* packedData, uint64_t byteSize)
 {
 	SPFO->outputFileStream.write((char*)packedData, byteSize);
 }

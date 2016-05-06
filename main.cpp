@@ -5,7 +5,7 @@
  *      Author: vincentvillani
  */
 
-
+/*
 #include <iostream>
 
 #include "DeadSigproc.h"
@@ -19,3 +19,4 @@ int main()
 
 	return 0;
 }
+*/

@@ -102,7 +102,7 @@ public:
   /*!
     \brief Default constructor, initializes all values to zero.
   */
-  SigprocHeader() :
+  inline SigprocHeader() :
     az_start(0.0), za_start(0.0), src_raj(0.0), src_dej(0.0),
     tstart(0.0), tsamp(0.0), period(0.0), fch1(0.0), foff(0.0),
     nchans(0), telescope_id(0), machine_id(0), data_type(0),
@@ -123,7 +123,7 @@ public:
 */
 
 template<class String, class BinaryStream>
-void header_write(BinaryStream& stream, const String& str)
+inline void header_write(BinaryStream& stream, const String& str)
 {
 	std::string s = str;
 	int len = s.size();
@@ -145,7 +145,7 @@ void header_write(BinaryStream& stream, const String& str)
   \param val integer value to be written.
 */
 template<class String, class BinaryStream>
-void header_write(BinaryStream& stream, String name, int val)
+inline void header_write(BinaryStream& stream, String name, int val)
 {
 	header_write(stream, name);
 	// TODO: Apply byte swapping for endian-correctness
@@ -155,7 +155,7 @@ void header_write(BinaryStream& stream, String name, int val)
 
 // WAR ambiguous conversion to int or double
 template<class String, class BinaryStream>
-void header_write(BinaryStream& stream, String name, unsigned val)
+inline void header_write(BinaryStream& stream, String name, unsigned val)
 {
 	header_write(stream, name, (int)val);
 }
@@ -172,7 +172,7 @@ void header_write(BinaryStream& stream, String name, unsigned val)
   \param val floating-point value to be written.
 */
 template<class String, class BinaryStream>
-void header_write(BinaryStream& stream, String name, double val)
+inline void header_write(BinaryStream& stream, String name, double val)
 {
 	header_write(stream, name);
 	// TODO: Apply byte swapping for endian-correctness
@@ -196,7 +196,7 @@ void header_write(BinaryStream& stream, String name, double val)
   \param za Zenith angle in floating-point format.
 */
 template<class BinaryStream>
-void header_write(BinaryStream& stream,
+inline void header_write(BinaryStream& stream,
 		  double raj, double dej,
 		  double az, double za)
 {
@@ -218,7 +218,7 @@ void header_write(BinaryStream& stream,
   \param val unsigned byte value to be written.
 */
 template<class String, class BinaryStream>
-void header_write(BinaryStream& stream, String name, unsigned char val)
+inline void header_write(BinaryStream& stream, String name, unsigned char val)
 {
 	header_write(stream, name);
 	stream.write((char*)&val, sizeof(unsigned char));
@@ -230,7 +230,7 @@ namespace detail
 
 	// Note: This is an internal function and is not intended to be used externally
 	template<class BinaryStream, class String>
-	bool header_read(BinaryStream& stream, String& str)
+	inline bool header_read(BinaryStream& stream, String& str)
 	{
 		int len;
 		char c_str[80];
@@ -262,7 +262,7 @@ namespace detail
 */
 
 template<class BinaryStream, class Header>
-bool read_header(BinaryStream& stream, Header& header)
+inline bool read_header(BinaryStream& stream, Header& header)
 {
 
 	std::string s;

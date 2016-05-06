@@ -16,7 +16,7 @@
 #include "SigprocFilterbankOutput.h"
 #include "SigprocFilterbankOutputUtility.h"
 
-void UnitTest_FilterbankReadInRawDataBlocks()
+inline void UnitTest_FilterbankReadInRawDataBlocks()
 {
 	//Open the SPF file
 	SigprocFilterbank SPF("/lustre/projects/p002_swin/surveys/SUPERB/2016-01-05-12:07:06/01/2016-01-05-12:07:06.fil");
@@ -44,7 +44,7 @@ void UnitTest_FilterbankReadInRawDataBlocks()
 }
 
 
-void UnitTest_ReadUnpackPackWrite()
+inline void UnitTest_ReadUnpackPackWrite()
 {
 	{
 		//Open the SPF file
