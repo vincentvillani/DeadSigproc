@@ -109,13 +109,13 @@ void UnpackRawDataBlock(RawDataBlock* rawDataBlock, unsigned char* unpackedData,
 void PrintFilterbankHeader(SigprocFilterbank* SPF)
 {
 
-	printf("Number of Samples: %u\n", SPF->get_nsamps());
+	printf("\nNumber of Samples: %u\n", SPF->get_nsamps());
 	printf("Number of Channels: %f\n", SPF->get_nchans());
 	printf("Bits per Sample: %f\n", SPF->get_nbits());
 	//printf("Polarisation channels: %lu", sigProc->get_)
 	printf("Sample time: %f\n", SPF->get_tsamp());
 	printf("First channel Frequency: %f\n", SPF->get_fch1());
-	printf("Per channel bandwidth: %f\n", SPF->get_foff());
+	printf("Per channel bandwidth: %f\n\n", SPF->get_foff());
 }
 
 
