@@ -303,13 +303,14 @@ public:
 	}
 
 
-
+	/*
 	inline uint64_t getCurrentBytePosition()
 	{
 		uint64_t currentBytePos = infile.tellg();
 
 		return currentBytePos - hdr.size;
 	}
+	*/
 
 
 	inline bool hasReachedEOF()

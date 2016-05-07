@@ -47,7 +47,7 @@ inline void ReadFilterbankData(SigprocFilterbank* SPF, RawDataBlock* rawDataBloc
 inline void ReadFilterbankData(SigprocFilterbank* SPF, unsigned char* packedDataOutput, uint64_t bytesToRead, uint64_t* bytesRead)
 {
 
-	std::cout << "Reading filterbank data..." << std::endl;
+	//std::cout << "Reading filterbank data..." << std::endl;
 
 	if(SPF->infile.eof() || SPF->infile.bad())
 	{
@@ -62,7 +62,7 @@ inline void ReadFilterbankData(SigprocFilterbank* SPF, unsigned char* packedData
 	//Note how many bytes were actually read
 	*bytesRead = SPF->infile.gcount();
 
-	std::cout << "Finished reading filterbank data...Bytes read" << *bytesRead << std::endl;
+	//std::cout << "Finished reading filterbank data...Bytes read: " << *bytesRead << std::endl;
 }
 
 

@@ -17,6 +17,8 @@ class RawDataBlock
 {
 public:
 
+	uint64_t rawDataBlockID;
+
 	unsigned char* packedRawData;
 
 	//Info about how much this data block can store & other meta data
@@ -24,18 +26,17 @@ public:
 	uint64_t totalDataLength; //Number of elements in the 'packed raw data' array
 	uint64_t usedDataLength; //How many elements in the packedRawData array are storing some actual data?
 
-	inline RawDataBlock() : packedRawData(NULL), nBits(0), totalDataLength(0), usedDataLength(0)
-	{
-	}
 
-	inline RawDataBlock(uint64_t arrayLength, unsigned char nBits)
+	inline RawDataBlock(uint64_t id, uint64_t arrayLength, unsigned char nBits)
 	{
-		totalDataLength = arrayLength;
-		usedDataLength = 0;
+		this->totalDataLength = arrayLength;
+		this->usedDataLength = 0;
 		this->nBits = nBits;
 
 		//Allocate memory
-		packedRawData = new unsigned char[arrayLength];
+		this->packedRawData = new unsigned char[arrayLength];
+
+		this->rawDataBlockID = id;
 	}
 	/*
 	RawDataBlock(unsigned char* rawData, uint64_t rawDataLength, unsigned char nBits, uint64_t usedDataLength) : packedRawData(rawData),
@@ -45,8 +46,8 @@ public:
 	*/
 	inline ~RawDataBlock()
 	{
-		if(packedRawData != NULL)
-			delete [] packedRawData;
+		if(this->packedRawData != NULL)
+			delete [] this->packedRawData;
 	}
 };
 

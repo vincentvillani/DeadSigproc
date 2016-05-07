@@ -26,7 +26,7 @@ inline void UnitTest_FilterbankReadInRawDataBlocks()
 	uint64_t storageByteSize = 15625 * 1024 * 10;
 
 	//Allocate space for 10 seconds worth of data at a time
-	RawDataBlock rawDataBlock(storageByteSize, (unsigned char)SPF.get_nbits());
+	RawDataBlock rawDataBlock(0, storageByteSize, (unsigned char)SPF.get_nbits());
 
 	uint64_t iteration = 0;
 
@@ -55,7 +55,7 @@ inline void UnitTest_ReadUnpackPackWrite()
 		uint64_t packedStorageByteSize = SPF.packedDataByteSize; //size that can hold everything in this file
 
 		//Allocate space for 10 seconds worth of data at a time
-		RawDataBlock rawDataBlock(packedStorageByteSize, (unsigned char)SPF.get_nbits());
+		RawDataBlock rawDataBlock(0, packedStorageByteSize, (unsigned char)SPF.get_nbits());
 
 		uint64_t iteration = 0;
 
@@ -102,8 +102,8 @@ inline void UnitTest_ReadUnpackPackWrite()
 	PrintFilterbankHeader(&SPFOut);
 
 	//Allocate space for each rawDataBlock
-	RawDataBlock rawDataBlockIn(SPFIn.packedDataByteSize, (unsigned char)SPFIn.get_nbits());
-	RawDataBlock rawDataBlockOut(SPFOut.packedDataByteSize, (unsigned char)SPFOut.get_nbits());
+	RawDataBlock rawDataBlockIn(0, SPFIn.packedDataByteSize, (unsigned char)SPFIn.get_nbits());
+	RawDataBlock rawDataBlockOut(1, SPFOut.packedDataByteSize, (unsigned char)SPFOut.get_nbits());
 
 	//Read all data from each filterbank file in and make sure they are the same
 	ReadFilterbankData(&SPFIn, &rawDataBlockIn);
