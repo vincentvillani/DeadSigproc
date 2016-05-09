@@ -18,6 +18,7 @@ class RawDataBlock
 public:
 
 	uint64_t rawDataBlockID;
+	uint32_t workerThreadsCompletedProcessing;
 
 	unsigned char* packedRawData;
 
@@ -26,6 +27,7 @@ public:
 	uint64_t totalDataLength; //Number of elements in the 'packed raw data' array
 	uint64_t usedDataLength; //How many elements in the packedRawData array are storing some actual data?
 
+	bool isLastBlock;
 
 	inline RawDataBlock(uint64_t id, uint64_t arrayLength, unsigned char nBits)
 	{
@@ -37,6 +39,10 @@ public:
 		this->packedRawData = new unsigned char[arrayLength];
 
 		this->rawDataBlockID = id;
+
+		this->workerThreadsCompletedProcessing = 0;
+
+		this->isLastBlock = false;
 	}
 	/*
 	RawDataBlock(unsigned char* rawData, uint64_t rawDataLength, unsigned char nBits, uint64_t usedDataLength) : packedRawData(rawData),
