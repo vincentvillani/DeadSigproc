@@ -10,6 +10,7 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 
 //Raw data block for storing filterbank data loaded from disk in the RAM.
@@ -36,7 +37,13 @@ public:
 		this->nBits = nBits;
 
 		//Allocate memory
-		this->packedRawData = new unsigned char[arrayLength];
+		this->packedRawData = new (std::nothrow) unsigned char[arrayLength];
+
+		if(this->packedRawData == NULL)
+		{
+			fprintf(stderr, "RawDataBlock::RawDataBlock(): Unable to allocate %llu bytes for packedRawData\n");
+			exit(1);
+		}
 
 		this->rawDataBlockID = id;
 
