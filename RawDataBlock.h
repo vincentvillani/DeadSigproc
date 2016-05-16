@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <new>
 
 
 //Raw data block for storing filterbank data loaded from disk in the RAM.

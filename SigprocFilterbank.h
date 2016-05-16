@@ -268,7 +268,7 @@ public:
 		this->infile.open(filename.c_str(), std::ifstream::in | std::ifstream::binary);
 
 		//Did the file open sucessfully?
-		if(!infile.is_open())
+		if(!infile.is_open() || infile.bad())
 		{
 			fprintf(stderr, "SigprocFilterbank::SigprocFilterbank(): Unable to open %s filterbank file", filename.c_str());
 			exit(1);
