@@ -31,6 +31,8 @@ public:
 
 	bool isLastBlock;
 
+	uint64_t numberOfDimensionsRemoved;
+
 	inline RawDataBlock(uint64_t id, uint64_t arrayLength, unsigned char nBits)
 	{
 		this->totalDataLength = arrayLength;
@@ -51,6 +53,8 @@ public:
 		this->workerThreadsCompletedProcessing = 0;
 
 		this->isLastBlock = false;
+
+		this->numberOfDimensionsRemoved = 0;
 	}
 	/*
 	RawDataBlock(unsigned char* rawData, uint64_t rawDataLength, unsigned char nBits, uint64_t usedDataLength) : packedRawData(rawData),
